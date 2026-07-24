@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://mat-lenh-bach-dang-1288.titanai6868.chatgpt.site"),
   title: "Mật lệnh Bạch Đằng 1288 | Lịch sử tương tác",
-  description: "Một lesson 60 phút giàu tương tác giúp trẻ khám phá chiến thắng Bạch Đằng năm 1288 qua câu chuyện, bản đồ, thủy triều và quyết định chiến thuật.",
+  description: "Bộ slide ít chữ và kế hoạch dạy học 60 phút giúp trẻ khám phá chiến thắng Bạch Đằng năm 1288.",
   openGraph: {
     title: "Mật lệnh Bạch Đằng 1288",
     description: "Một con nước. Một trận địa vô hình. Một trải nghiệm lịch sử tương tác.",
