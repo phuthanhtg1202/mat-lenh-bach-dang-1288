@@ -11,35 +11,35 @@ const runSheet = [
     student: "Lắng nghe, quan sát, chưa ghi chép.",
   },
   {
-    time: "02–09′",
+    time: "02–12′",
     slide: "Trang 1–7",
     title: "Lật sách kể chuyện",
-    teacher: "Lật chậm từng trang, đọc đúng phần chữ ngắn rồi dừng 3 giây cho học sinh nhìn tranh. Ở trang cuối hỏi: “Chi tiết nào khiến em tò mò nhất?”",
-    student: "Nghe truyện, quan sát và chọn một chi tiết đáng nhớ.",
+    teacher: "Kể mỗi trang trong 50–70 giây. Đọc như một câu chuyện, thay đổi nhịp và hướng mắt về học sinh sau mỗi đoạn. Ở trang cuối hỏi: “Chi tiết nào khiến em tò mò nhất?”",
+    student: "Nghe truyện, quan sát, dự đoán và chọn một chi tiết đáng nhớ.",
   },
   {
-    time: "09–14′",
+    time: "12–16′",
     slide: "02",
     title: "Bỏ phiếu: Có đuổi theo không?",
     teacher: "Cho học sinh chọn Có/Không và nêu một lý do. Không xác nhận đáp án. Hỏi thêm: “Điều gì khiến em nghi ngờ?”",
     student: "Bỏ phiếu và bảo vệ lựa chọn.",
   },
   {
-    time: "14–18′",
+    time: "16–20′",
     slide: "03",
     title: "Xem đúng một đoạn phim",
     teacher: "Mở phim VTV từ 00:40 đến 03:10. Dừng lại và hỏi: “Dòng sông trở thành vũ khí bằng cách nào?”",
     student: "Ghi đúng ba từ khóa nghe được.",
   },
   {
-    time: "18–27′",
+    time: "20–28′",
     slide: "04",
     title: "Mở ba manh mối",
     teacher: "Chia lớp thành ba đội: Cắt lương – Giấu cọc – Phục binh. Mỗi đội giải thích vai trò của manh mối trong 30 giây.",
     student: "Thảo luận nhóm và nối ba mắt xích.",
   },
   {
-    time: "27–37′",
+    time: "28–37′",
     slide: "05",
     title: "Điều khiển con nước",
     teacher: "Kéo thanh thủy triều thật chậm. Khi học sinh thấy đúng thời cơ, cả lớp đứng dậy. Chốt: cọc chỉ hiệu quả khi kết hợp với thủy triều và nghi binh.",
@@ -164,7 +164,7 @@ export default function TeacherPlan() {
           <p className="teacher-eyebrow">CÁCH KỂ FLIPBOOK</p>
           <h2>Nhìn học sinh, không nhìn màn hình</h2>
           <blockquote>
-            “Mỗi trang chỉ đọc một lần. Sau đó im lặng ba giây để bức tranh tự kể tiếp. Đến trang nước rút, hạ giọng; đến trang vòng vây, tăng nhịp; ở bình minh chiến thắng, chậm lại và hỏi học sinh điều gì làm các em tự hào.”
+            “Đừng đọc đều giọng. Ở trang kế sách, nói chậm như đang tiết lộ một bí mật. Khi đoàn thuyền đuổi sâu, tăng nhịp. Đến lúc nước rút, hạ giọng rồi dừng hai giây trước câu ‘Một đầu cọc nhô lên’. Ở bình minh chiến thắng, chậm lại và hỏi học sinh điều gì làm các em tự hào.”
           </blockquote>
         </article>
         <article className="history-note-card">
