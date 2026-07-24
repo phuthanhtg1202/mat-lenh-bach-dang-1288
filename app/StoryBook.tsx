@@ -136,7 +136,7 @@ export default function StoryBook({ onFinish }: StoryBookProps) {
   }, [page, onFinish]);
 
   return (
-    <main className="story-shell">
+    <main className={drumPlaying ? "story-shell drum-active" : "story-shell"}>
       <audio
         ref={audioRef}
         src="/audio/trong-tran-hao-hung.mp3"

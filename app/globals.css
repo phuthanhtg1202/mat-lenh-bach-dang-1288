@@ -167,6 +167,118 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .slide-controls span { min-width: 64px; font-size: .72rem; text-align: center; }
 .slide-controls b { color: #e7b76b; }
 
+/* LIGHT GAME MOTION */
+.storybook-spread::after,
+.lesson-slide::after {
+  content: "";
+  position: absolute;
+  z-index: 7;
+  inset: -35%;
+  pointer-events: none;
+  background: linear-gradient(112deg, transparent 42%, rgba(246, 193, 105, .08) 49%, transparent 56%);
+  transform: translateX(-48%);
+  animation: missionSweep 7s ease-in-out infinite;
+}
+.storybook-spread::after { z-index: 2; }
+.storybook-paper { animation: panelRise .52s cubic-bezier(.18,.78,.25,1) both; }
+.storybook-art img,
+.story-cover-image,
+.lesson-slide > .slide-image { animation: cinematicDrift 12s ease-in-out infinite alternate; will-change: transform; }
+.story-number,
+.deck-progress button.active,
+.story-progress button.active { animation: hudPulse 1.8s ease-in-out infinite; }
+.story-cover-copy > span,
+.slide-kicker { animation: signalIn .65s ease-out both; }
+.story-cover-copy h1,
+.lesson-slide h1 { animation: titleIn .58s cubic-bezier(.16,.8,.28,1) both; }
+.story-cover-copy button,
+.start-mission { animation: questBeacon 2.4s ease-in-out infinite; }
+.story-cover-copy button:hover,
+.start-mission:hover,
+.round-action:hover,
+.story-controls button:hover,
+.slide-controls button:not(:disabled):hover,
+.watch-card a:hover { filter: brightness(1.1); transform: translateY(-2px); }
+.story-cover-copy button:active,
+.start-mission:active,
+.round-action:active,
+.story-controls button:active,
+.slide-controls button:not(:disabled):active,
+.watch-card a:active { transform: translateY(1px) scale(.98); }
+.lesson-slide { animation: missionEnter .48s cubic-bezier(.16,.78,.3,1) both; }
+.vote-block,
+.watch-card,
+.map-title,
+.tide-control,
+.choice-row,
+.key-row,
+.exit-layout textarea { animation: panelRise .54s .08s cubic-bezier(.18,.78,.25,1) both; }
+.watch-card { animation: panelRise .54s .08s cubic-bezier(.18,.78,.25,1) both, cardFloat 5s 1s ease-in-out infinite; }
+.vote-block button,
+.choice-row button,
+.beat-row button,
+.key-row button,
+.map-clue { transition: transform .2s ease, filter .2s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease; }
+.vote-block button:hover,
+.choice-row button:hover,
+.beat-row button:hover,
+.key-row button:hover { filter: brightness(1.1); transform: translateY(-3px); }
+.vote-block button:active,
+.choice-row button:active,
+.beat-row button:active,
+.key-row button:active,
+.map-clue:active { transform: scale(.97); }
+.vote-block button.selected,
+.choice-row button.selected { animation: choiceLock .34s ease-out; }
+.map-clue:not(.open) { animation: clueBeacon 1.9s ease-in-out infinite; }
+.map-clue.open { animation: unlockPop .38s cubic-bezier(.16,.9,.3,1); }
+.map-reveal,
+.choice-feedback { animation: rewardPop .44s cubic-bezier(.16,.9,.3,1) both; }
+.tide-slide::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: -35%;
+  top: 48%;
+  width: 170%;
+  height: 22%;
+  pointer-events: none;
+  background: repeating-linear-gradient(172deg, transparent 0 22px, rgba(194,224,221,.11) 23px 26px, transparent 27px 46px);
+  filter: blur(1px);
+  animation: waterCurrent 6s linear infinite;
+}
+.tide-images img { animation: waterBreath 5.5s ease-in-out infinite alternate; }
+.battle-headline { animation: battleCallout .45s cubic-bezier(.14,.86,.24,1) both; }
+.beat-row button.active { animation: activeBeat 1.35s ease-in-out infinite; }
+.key-row button.open { animation: unlockPop .42s cubic-bezier(.16,.9,.3,1); }
+.final-key {
+  position: relative;
+  isolation: isolate;
+  animation: victoryReveal .58s cubic-bezier(.15,.9,.28,1) both;
+}
+.final-key::before,
+.final-key::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -12px -22px;
+  border: 1px solid rgba(230,189,112,.65);
+  border-radius: 999px;
+  animation: victoryRing 1.8s ease-out infinite;
+}
+.final-key::after { animation-delay: .6s; }
+.drum-active .storybook-stage,
+.drum-active .slide-stage { animation: battleShake .18s linear 3; }
+.drum-active::after {
+  content: "";
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  pointer-events: none;
+  background: rgba(230,177,99,.2);
+  animation: drumFlash .48s ease-out both;
+}
+
 /* TEACHER PLAN */
 .teacher-page { min-height: 100vh; color: #283633; background: #f3ecdc; }
 .teacher-nav { min-height: 64px; position: sticky; z-index: 20; top: 0; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 14px; padding: 10px clamp(18px, 5vw, 70px); color: #efe4cc; background: #092428; border-bottom: 1px solid rgba(255,255,255,.12); }
@@ -219,6 +331,27 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 @keyframes drumPulse { to { transform: scale(1.18); box-shadow: 0 0 0 9px rgba(205,126,75,.18); } }
 @keyframes pageTurnNext { from { opacity: .55; transform: rotateY(-11deg) translateX(18px); filter: brightness(.72); } to { opacity: 1; transform: rotateY(0) translateX(0); filter: brightness(1); } }
 @keyframes pageTurnBack { from { opacity: .55; transform: rotateY(11deg) translateX(-18px); filter: brightness(.72); } to { opacity: 1; transform: rotateY(0) translateX(0); filter: brightness(1); } }
+@keyframes missionEnter { from { opacity: .35; transform: scale(1.018) translateY(12px); filter: brightness(.7); } to { opacity: 1; transform: scale(1) translateY(0); filter: brightness(1); } }
+@keyframes missionSweep { 0%, 18% { transform: translateX(-48%); opacity: 0; } 28% { opacity: 1; } 52%, 100% { transform: translateX(48%); opacity: 0; } }
+@keyframes cinematicDrift { from { transform: scale(1.025) translate3d(-.35%, 0, 0); } to { transform: scale(1.075) translate3d(.7%, -.5%, 0); } }
+@keyframes panelRise { from { opacity: 0; transform: translateY(16px) scale(.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes signalIn { from { opacity: 0; letter-spacing: .32em; } to { opacity: 1; } }
+@keyframes titleIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes hudPulse { 50% { filter: brightness(1.35); box-shadow: 0 0 18px rgba(225,168,93,.32); } }
+@keyframes questBeacon { 50% { box-shadow: 0 0 0 7px rgba(232,185,107,.11), 0 10px 30px rgba(0,0,0,.2); } }
+@keyframes cardFloat { 50% { transform: translateY(-5px); } }
+@keyframes choiceLock { 45% { transform: scale(1.025); } }
+@keyframes clueBeacon { 50% { box-shadow: 0 0 0 9px rgba(168,74,54,.13), 0 12px 30px rgba(0,0,0,.35); } }
+@keyframes unlockPop { 0% { transform: scale(.82) rotate(-2deg); } 65% { transform: scale(1.06) rotate(1deg); } 100% { transform: scale(1) rotate(0); } }
+@keyframes rewardPop { from { opacity: 0; transform: translateY(12px) scale(.92); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes waterCurrent { from { transform: translate3d(-3%, 0, 0); } to { transform: translate3d(3%, 5px, 0); } }
+@keyframes waterBreath { from { transform: scale(1.02); } to { transform: scale(1.055) translateY(-3px); } }
+@keyframes battleCallout { from { opacity: 0; transform: translateX(-28px) scale(.97); } to { opacity: 1; transform: translateX(0) scale(1); } }
+@keyframes activeBeat { 50% { filter: brightness(1.13); box-shadow: 0 0 0 5px rgba(228,181,104,.16); } }
+@keyframes victoryReveal { 0% { opacity: 0; transform: scale(.7); filter: brightness(2); } 70% { transform: scale(1.08); } 100% { opacity: 1; transform: scale(1); filter: brightness(1); } }
+@keyframes victoryRing { from { opacity: .7; transform: scale(.82); } to { opacity: 0; transform: scale(1.35); } }
+@keyframes battleShake { 25% { transform: translateX(-3px) rotate(-.08deg); } 75% { transform: translateX(3px) rotate(.08deg); } }
+@keyframes drumFlash { from { opacity: 1; } to { opacity: 0; } }
 
 @media (max-width: 900px) {
   .story-progress { display: none; }

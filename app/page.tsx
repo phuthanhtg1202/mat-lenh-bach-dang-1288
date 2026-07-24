@@ -67,7 +67,7 @@ export default function LessonDeck() {
   }
 
   return (
-    <main className="deck-shell">
+    <main className={drumPlaying ? "deck-shell drum-active" : "deck-shell"}>
       <audio
         ref={audioRef}
         src="/audio/trong-tran-hao-hung.mp3"
@@ -250,7 +250,7 @@ export default function LessonDeck() {
           <section className="lesson-slide battle-slide">
             <img className="slide-image" src="/images/bach-dang-cao-trao.png" alt="Cao trào trận Bạch Đằng khi cọc xuất hiện" />
             <div className="slide-scrim battle-scrim" />
-            <div className="battle-headline">
+            <div key={battleBeat} className="battle-headline">
               <span>0{battleBeat + 1}</span>
               <div><small>{battleBeats[battleBeat][0]}</small><h1>{battleBeats[battleBeat][1]}</h1></div>
             </div>
