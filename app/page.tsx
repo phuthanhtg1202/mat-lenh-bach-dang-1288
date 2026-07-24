@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import StoryBook from "./StoryBook";
 
 const TOTAL_SLIDES = 9;
 
@@ -13,6 +14,7 @@ const battleBeats = [
 ];
 
 export default function LessonDeck() {
+  const [storyDone, setStoryDone] = useState(false);
   const [slide, setSlide] = useState(0);
   const [vote, setVote] = useState<"yes" | "no" | null>(null);
   const [clues, setClues] = useState<string[]>([]);
@@ -60,6 +62,10 @@ export default function LessonDeck() {
     );
   };
 
+  if (!storyDone) {
+    return <StoryBook onFinish={() => setStoryDone(true)} />;
+  }
+
   return (
     <main className="deck-shell">
       <audio
@@ -85,6 +91,7 @@ export default function LessonDeck() {
           ))}
         </div>
         <div className="deck-tools">
+          <button onClick={() => setStoryDone(false)}>Đọc truyện</button>
           <button className={drumPlaying ? "sound-button playing" : "sound-button"} onClick={playDrum}>
             <span>●</span> Trống trận
           </button>

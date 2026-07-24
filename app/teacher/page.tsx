@@ -4,42 +4,49 @@ import { useEffect, useState } from "react";
 
 const runSheet = [
   {
-    time: "00–04′",
-    slide: "01",
+    time: "00–02′",
+    slide: "Bìa truyện",
     title: "Mở màn bằng tiếng trống",
-    teacher: "Tắt bớt đèn. Phát tiếng trống. Nói: “Rạng sáng năm 1288, một đoàn thuyền đang tiến vào dòng sông tưởng như hoàn toàn yên tĩnh…”",
+    teacher: "Tắt bớt đèn. Phát tiếng trống. Nói: “Trước khi giải mật lệnh, chúng ta sẽ bước vào một câu chuyện có thật.”",
     student: "Lắng nghe, quan sát, chưa ghi chép.",
   },
   {
-    time: "04–10′",
+    time: "02–09′",
+    slide: "Trang 1–7",
+    title: "Lật sách kể chuyện",
+    teacher: "Lật chậm từng trang, đọc đúng phần chữ ngắn rồi dừng 3 giây cho học sinh nhìn tranh. Ở trang cuối hỏi: “Chi tiết nào khiến em tò mò nhất?”",
+    student: "Nghe truyện, quan sát và chọn một chi tiết đáng nhớ.",
+  },
+  {
+    time: "09–14′",
     slide: "02",
     title: "Bỏ phiếu: Có đuổi theo không?",
     teacher: "Cho học sinh chọn Có/Không và nêu một lý do. Không xác nhận đáp án. Hỏi thêm: “Điều gì khiến em nghi ngờ?”",
     student: "Bỏ phiếu và bảo vệ lựa chọn.",
   },
   {
-    time: "10–14′",
+    time: "14–18′",
     slide: "03",
     title: "Xem đúng một đoạn phim",
     teacher: "Mở phim VTV từ 00:40 đến 03:10. Dừng lại và hỏi: “Dòng sông trở thành vũ khí bằng cách nào?”",
     student: "Ghi đúng ba từ khóa nghe được.",
   },
   {
-    time: "14–24′",
+    time: "18–27′",
     slide: "04",
     title: "Mở ba manh mối",
     teacher: "Chia lớp thành ba đội: Cắt lương – Giấu cọc – Phục binh. Mỗi đội giải thích vai trò của manh mối trong 30 giây.",
     student: "Thảo luận nhóm và nối ba mắt xích.",
   },
   {
-    time: "24–36′",
+    time: "27–37′",
     slide: "05",
     title: "Điều khiển con nước",
     teacher: "Kéo thanh thủy triều thật chậm. Khi học sinh thấy đúng thời cơ, cả lớp đứng dậy. Chốt: cọc chỉ hiệu quả khi kết hợp với thủy triều và nghi binh.",
     student: "Quan sát, dự đoán, hô “Thời cơ!”",
   },
   {
-    time: "36–45′",
+    time: "37–45′",
     slide: "06",
     title: "Hội đồng tác chiến",
     teacher: "Mỗi đội chọn A/B/C và đưa ra hai bằng chứng. Sau khi chọn, yêu cầu đội khác tìm một lỗ hổng trong phương án.",
@@ -99,7 +106,7 @@ export default function TeacherPlan() {
       <header className="teacher-hero">
         <p>KẾ HOẠCH DẠY HỌC</p>
         <h1>Mật lệnh<br />Bạch Đằng 1288</h1>
-        <div className="teacher-meta"><span>60 phút</span><span>9 slide</span><span>9–15 tuổi</span></div>
+        <div className="teacher-meta"><span>60 phút</span><span>7 trang truyện + 9 slide</span><span>9–15 tuổi</span></div>
       </header>
 
       <section className="teacher-grid two-columns">
@@ -118,6 +125,7 @@ export default function TeacherPlan() {
           <h2>5 phút là đủ</h2>
           <ul>
             <li>Mở slide và trang kế hoạch ở hai tab.</li>
+            <li>Lật thử một trang truyện bằng nút hoặc phím mũi tên.</li>
             <li>Thử nút <b>Trống trận</b> một lần.</li>
             <li>Mở sẵn phim VTV tại mốc <b>00:40</b>.</li>
             <li>Mỗi đội có một tờ A4 và bút.</li>
@@ -142,7 +150,7 @@ export default function TeacherPlan() {
         <div className="run-sheet-table">
           {runSheet.map((row) => (
             <article key={row.time}>
-              <div className="run-time"><strong>{row.time}</strong><span>Slide {row.slide}</span></div>
+              <div className="run-time"><strong>{row.time}</strong><span>{/^\d+$/.test(row.slide) ? `Slide ${row.slide}` : row.slide}</span></div>
               <div className="run-title"><h3>{row.title}</h3></div>
               <div><b>Giáo viên</b><p>{row.teacher}</p></div>
               <div><b>Học sinh</b><p>{row.student}</p></div>
@@ -153,10 +161,10 @@ export default function TeacherPlan() {
 
       <section className="teacher-grid two-columns">
         <article className="story-script-card">
-          <p className="teacher-eyebrow">LỜI KỂ CAO TRÀO</p>
-          <h2>Đọc khi chuyển sang slide 07</h2>
+          <p className="teacher-eyebrow">CÁCH KỂ FLIPBOOK</p>
+          <h2>Nhìn học sinh, không nhìn màn hình</h2>
           <blockquote>
-            “Nước rút. Một đầu cọc nhô lên, rồi hàng trăm đầu cọc. Những chiến thuyền lớn không còn chỗ quay đầu. Từ các nhánh sông và hai bên bờ, quân Đại Việt đồng loạt xuất hiện. Chiếc bẫy khép lại không phải bằng phép màu, mà bằng sự chuẩn bị, lòng đoàn kết và khả năng chờ đúng một khoảnh khắc.”
+            “Mỗi trang chỉ đọc một lần. Sau đó im lặng ba giây để bức tranh tự kể tiếp. Đến trang nước rút, hạ giọng; đến trang vòng vây, tăng nhịp; ở bình minh chiến thắng, chậm lại và hỏi học sinh điều gì làm các em tự hào.”
           </blockquote>
         </article>
         <article className="history-note-card">
