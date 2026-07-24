@@ -13,6 +13,44 @@ const battleBeats = [
   ["Khép vòng vây", "Ô Mã Nhi bị bắt"],
 ];
 
+const enemyMission = [
+  {
+    kicker: "01 · CỬA SÔNG",
+    title: "Mặt sông hoàn toàn yên",
+    text: "Từ boong tàu địch, em chỉ thấy nước lớn, luồng sông rộng và vài thuyền nhẹ ở rất xa. Không một đầu cọc nào lộ ra.",
+    sight: "Không thấy nguy hiểm",
+    tide: "Triều cao",
+  },
+  {
+    kicker: "02 · MỒI NHỬ",
+    title: "Họ đánh rồi quay đầu",
+    text: "Thuyền Đại Việt áp sát trong chốc lát rồi rút nhanh. Từ xa, cảnh ấy rất dễ bị hiểu thành một đội quân đang yếu thế và bỏ chạy.",
+    sight: "Đối phương đang lui",
+    tide: "Triều vẫn cao",
+  },
+  {
+    kicker: "03 · TRUY ĐUỔI",
+    title: "Đội hình đi quá sâu",
+    text: "Chiến thuyền lớn tăng tốc. Mọi ánh mắt đều hướng về những chiếc thuyền trước mặt, nên không ai nhận ra đường rút phía sau đang dần bị khóa.",
+    sight: "Chỉ nhìn về phía trước",
+    tide: "Bắt đầu đổi chiều",
+  },
+  {
+    kicker: "04 · NƯỚC RÚT",
+    title: "Chiếc bẫy bỗng xuất hiện",
+    text: "Mực nước hạ xuống. Hàng trăm đầu cọc nhô lên ngay giữa đội hình. Thuyền lớn không thể quay đầu, còn luồng nước an toàn đã biến mất.",
+    sight: "Cọc ở khắp phía trước",
+    tide: "Rút rất nhanh",
+  },
+  {
+    kicker: "05 · PHỤC BINH",
+    title: "Tiếng trống nổi bốn phía",
+    text: "Thuyền Đại Việt đồng loạt quay lại, quân mai phục xuất hiện từ hai bờ. Điều tưởng là một cuộc truy đuổi dễ dàng hóa thành vòng vây đã chuẩn bị sẵn.",
+    sight: "Không còn đường thoát",
+    tide: "Cọc đã lộ",
+  },
+];
+
 export default function LessonDeck() {
   const [storyDone, setStoryDone] = useState(false);
   const [slide, setSlide] = useState(0);
@@ -23,6 +61,8 @@ export default function LessonDeck() {
   const [battleBeat, setBattleBeat] = useState(0);
   const [keys, setKeys] = useState<string[]>([]);
   const [drumPlaying, setDrumPlaying] = useState(false);
+  const [enemyPhase, setEnemyPhase] = useState(0);
+  const [enemyPlaying, setEnemyPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
   const goTo = (next: number) => setSlide(Math.max(0, Math.min(TOTAL_SLIDES - 1, next)));
@@ -37,6 +77,32 @@ export default function LessonDeck() {
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [slide]);
+
+  useEffect(() => {
+    if (slide !== 1 || !enemyPlaying) return;
+    if (enemyPhase === 1 || enemyPhase >= enemyMission.length - 1) {
+      setEnemyPlaying(false);
+      return;
+    }
+    const timer = window.setTimeout(() => {
+      setEnemyPhase((current) => Math.min(enemyMission.length - 1, current + 1));
+    }, enemyPhase === 0 ? 3200 : 2800);
+    return () => window.clearTimeout(timer);
+  }, [slide, enemyPhase, enemyPlaying]);
+
+  const playEnemyMission = () => {
+    if (enemyPhase >= enemyMission.length - 1) {
+      setEnemyPhase(0);
+      setVote(null);
+    }
+    setEnemyPlaying(true);
+  };
+
+  const chooseEnemyOrder = (order: "yes" | "no") => {
+    setVote(order);
+    setEnemyPhase(2);
+    setEnemyPlaying(true);
+  };
 
   const playDrum = async () => {
     const audio = audioRef.current;
@@ -115,21 +181,72 @@ export default function LessonDeck() {
         )}
 
         {slide === 1 && (
-          <section className="lesson-slide question-slide">
-            <img className="slide-image" src="/images/song-bach-dang-trieu-cao.png" alt="Đoàn thuyền tiến vào sông Bạch Đằng lúc triều cao" />
-            <div className="slide-scrim left-scrim" />
-            <div className="slide-copy question-copy">
-              <span className="slide-kicker">RẠNG SÁNG · 9.4.1288</span>
-              <h1>Dòng sông<br />đang giấu gì?</h1>
-              <p className="one-line">Thuyền nhẹ Đại Việt đánh rồi quay đầu.</p>
-              <div className="vote-block">
-                <b>Nếu là Ô Mã Nhi, em có đuổi theo?</b>
-                <div>
-                  <button className={vote === "yes" ? "selected" : ""} onClick={() => setVote("yes")}>Có</button>
-                  <button className={vote === "no" ? "selected" : ""} onClick={() => setVote("no")}>Không</button>
-                </div>
-                {vote && <small>Giữ đáp án. Chưa tiết lộ!</small>}
+          <section className={`lesson-slide enemy-pov-slide enemy-phase-${enemyPhase} ${enemyPlaying ? "is-playing" : ""}`}>
+            <div className="enemy-world" aria-label="Góc nhìn từ boong chiến thuyền địch trên sông Bạch Đằng">
+              <img className="enemy-pov-frame enemy-high-frame" src="/images/enemy-pov-high-tide.png" alt="Góc nhìn quân địch khi nước triều còn cao và bãi cọc bị che kín" />
+              <img className="enemy-pov-frame enemy-low-frame" src="/images/enemy-pov-low-tide.png" alt="Cùng góc nhìn khi nước rút làm bãi cọc bất ngờ xuất hiện" />
+              <div className="enemy-target-lock" aria-hidden="true"><span /></div>
+              <div className="enemy-speed-lines" aria-hidden="true" />
+              <div className="enemy-ambush enemy-ambush-left" aria-hidden="true">Phục binh</div>
+              <div className="enemy-ambush enemy-ambush-right" aria-hidden="true">Phục binh</div>
+              <div className="enemy-impact-flash" aria-hidden="true" />
+            </div>
+            <div className="enemy-vignette" />
+
+            <div className="enemy-hud">
+              <span>BẠN ĐANG Ở TRÊN THUYỀN ĐỊCH</span>
+              <div><b>{enemyMission[enemyPhase].sight}</b><small>{enemyMission[enemyPhase].tide}</small></div>
+            </div>
+
+            <div className="enemy-mission-panel">
+              <div key={enemyPhase} className="enemy-phase-copy">
+                <span>{enemyMission[enemyPhase].kicker}</span>
+                <h1>{enemyMission[enemyPhase].title}</h1>
+                <p>{enemyMission[enemyPhase].text}</p>
               </div>
+
+              {enemyPhase === 1 ? (
+                <div className="enemy-decision">
+                  <b>Em ra lệnh thế nào?</b>
+                  <div>
+                    <button className={vote === "yes" ? "selected" : ""} onClick={() => chooseEnemyOrder("yes")}>Đuổi theo!</button>
+                    <button className={vote === "no" ? "selected" : ""} onClick={() => chooseEnemyOrder("no")}>Dừng quan sát</button>
+                  </div>
+                  {vote === "no" && <small>Em đã cảnh giác. Nhưng Ô Mã Nhi trong lịch sử đã chọn truy đuổi.</small>}
+                </div>
+              ) : (
+                <button
+                  className="enemy-play-button"
+                  onClick={() => enemyPlaying ? setEnemyPlaying(false) : playEnemyMission()}
+                >
+                  {enemyPlaying ? "Tạm dừng" : enemyPhase === enemyMission.length - 1 ? "Xem lại từ đầu" : enemyPhase === 0 ? "Bắt đầu hành trình" : "Tiếp tục"}
+                </button>
+              )}
+
+              {enemyPhase >= 2 && vote === "no" && (
+                <small className="enemy-history-choice">Em chọn dừng lại. Trong lịch sử, Ô Mã Nhi vẫn thúc quân truy đuổi — hãy xem điều xảy ra.</small>
+              )}
+
+              {enemyPhase === enemyMission.length - 1 && (
+                <div className="enemy-surprise">
+                  <b>Vì sao bị bất ngờ?</b>
+                  <span>Triều cao che bãi cọc</span>
+                  <span>Thuyền nhẹ giả lui</span>
+                  <span>Đội hình bị nhử sâu</span>
+                  <span>Phục binh chờ đúng lúc</span>
+                </div>
+              )}
+            </div>
+
+            <div className="enemy-timeline" aria-label="Các giai đoạn của hành trình">
+              {enemyMission.map((phase, index) => (
+                <button
+                  key={phase.kicker}
+                  className={index === enemyPhase ? "active" : index < enemyPhase ? "seen" : ""}
+                  onClick={() => { setEnemyPlaying(false); setEnemyPhase(index); }}
+                  aria-label={`Xem giai đoạn ${index + 1}`}
+                >{index + 1}</button>
+              ))}
             </div>
           </section>
         )}

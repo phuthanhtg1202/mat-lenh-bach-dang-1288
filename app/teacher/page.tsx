@@ -20,9 +20,9 @@ const runSheet = [
   {
     time: "12–16′",
     slide: "02",
-    title: "Bỏ phiếu: Có đuổi theo không?",
-    teacher: "Cho học sinh chọn Có/Không và nêu một lý do. Không xác nhận đáp án. Hỏi thêm: “Điều gì khiến em nghi ngờ?”",
-    student: "Bỏ phiếu và bảo vệ lựa chọn.",
+    title: "Nhập vai hạm đội địch",
+    teacher: "Bấm Bắt đầu hành trình và để cảnh dừng ở Mồi nhử. Cho lớp ra lệnh Đuổi theo/Dừng quan sát, rồi chạy tiếp đến khi bãi cọc lộ ra. Chốt bằng câu hỏi: “Ta đã nhìn thấy gì, và điều gì đã bị che giấu?”",
+    student: "Quan sát từ boong tàu địch, ra quyết định và giải thích vì sao mình bị bất ngờ.",
   },
   {
     time: "16–20′",
