@@ -53,6 +53,7 @@ test("keeps all 13 slides and the new key-fact material", async () => {
   assert.match(teacher, /9-4-1288/);
   assert.equal(story.match(/milestone:/g)?.length, 8);
   assert.match(story, /CỘT MỐC THỜI GIAN/);
+  assert.match(story, /story-time-scene/);
   assert.match(story, /Chiều tối · 9\.4\.1288/);
 
   await access(new URL("../public/images/tran-hung-dao-hero.png", import.meta.url));

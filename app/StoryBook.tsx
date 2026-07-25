@@ -28,7 +28,7 @@ const storyPages = [
   },
   {
     kicker: "KẾ SÁCH TRONG ĐÊM",
-    milestone: "Cuối tháng 3 → đầu tháng 4",
+    milestone: "30.3 → 8.4.1288",
     moment: "Bày thế trận Bạch Đằng",
     title: "Chọn dòng sông",
     text: [
@@ -41,7 +41,7 @@ const storyPages = [
   },
   {
     kicker: "CẢ DÂN TỘC VÀO TRẬN",
-    milestone: "Đầu tháng 4.1288",
+    milestone: "Đầu 4.1288",
     moment: "Bí mật dựng bãi cọc",
     title: "Không ai đứng ngoài",
     text: [
@@ -54,7 +54,7 @@ const storyPages = [
   },
   {
     kicker: "RẠNG SÁNG · 9.4.1288",
-    milestone: "Rạng sáng · 9.4.1288",
+    milestone: "Rạng sáng · 9.4",
     moment: "Nước cao che kín bãi cọc",
     title: "Dòng sông im lặng",
     text: [
@@ -67,7 +67,7 @@ const storyPages = [
   },
   {
     kicker: "CON NƯỚC ĐỔI CHIỀU",
-    milestone: "Gần trưa · 9.4.1288",
+    milestone: "Gần trưa · 9.4",
     moment: "Nước rút, cọc bắt đầu lộ",
     title: "Chiếc bẫy thức giấc",
     text: [
@@ -80,7 +80,7 @@ const storyPages = [
   },
   {
     kicker: "BẠCH ĐẰNG DẬY SÓNG",
-    milestone: "Trưa → chiều · 9.4.1288",
+    milestone: "Trưa → chiều · 9.4",
     moment: "Tổng công kích",
     title: "Vòng vây khép lại",
     text: [
@@ -193,16 +193,19 @@ export default function StoryBook({ onFinish }: StoryBookProps) {
       >
         <div className="book-shadow" aria-hidden="true" />
         <article key={page} className={`storybook-spread ${current.cover ? "story-cover" : page % 2 === 0 ? "story-right" : "story-left"} turn-${turnDirection}`} aria-live="polite">
+          <div
+            className={`story-time-scene ${current.cover ? "cover-story-time" : ""}`}
+            aria-label={`${current.milestone}: ${current.moment}`}
+          >
+            <span>CỘT MỐC THỜI GIAN</span>
+            <strong>{current.milestone}</strong>
+            <em>{current.moment}</em>
+          </div>
           {current.cover ? (
             <>
               <img className="story-cover-image" src={current.image} alt={current.alt} />
               <div className="story-cover-scrim" />
               <div className="story-cover-copy">
-                <div className="story-time-marker cover-time-marker">
-                  <small>CỘT MỐC THỜI GIAN</small>
-                  <b>{current.milestone}</b>
-                  <em>{current.moment}</em>
-                </div>
                 <span>{current.kicker}</span>
                 <h1>{current.title}</h1>
                 <p>{current.text[0]}</p>
@@ -214,11 +217,6 @@ export default function StoryBook({ onFinish }: StoryBookProps) {
               <div className="storybook-paper">
                 <span className="story-number">{String(page).padStart(2, "0")}</span>
                 <div className="story-copy-inner">
-                  <div className="story-time-marker">
-                    <small>CỘT MỐC THỜI GIAN</small>
-                    <b>{current.milestone}</b>
-                    <em>{current.moment}</em>
-                  </div>
                   <p className="story-kicker">{current.kicker}</p>
                   <h1>{current.title}</h1>
                   <div className="story-body">
