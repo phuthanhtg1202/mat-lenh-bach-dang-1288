@@ -112,6 +112,7 @@ type StoryBookProps = {
 
 export default function StoryBook({ onFinish }: StoryBookProps) {
   const [page, setPage] = useState(0);
+  const [textRevealed, setTextRevealed] = useState(false);
   const [turnDirection, setTurnDirection] = useState<"next" | "back">("next");
   const [drumPlaying, setDrumPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -120,8 +121,12 @@ export default function StoryBook({ onFinish }: StoryBookProps) {
 
   const turnTo = (next: number) => {
     const target = Math.max(0, Math.min(storyPages.length - 1, next));
-    if (target === page) return;
+    if (target === page) {
+      setTextRevealed(false);
+      return;
+    }
     setTurnDirection(target > page ? "next" : "back");
+    setTextRevealed(false);
     setPage(target);
   };
 
@@ -142,14 +147,16 @@ export default function StoryBook({ onFinish }: StoryBookProps) {
       const target = event.target as HTMLElement | null;
       if (target?.matches("button, a")) return;
       if (event.key === "ArrowRight" || event.key === " ") {
-        if (page === storyPages.length - 1) onFinish();
+        event.preventDefault();
+        if (!textRevealed) setTextRevealed(true);
+        else if (page === storyPages.length - 1) onFinish();
         else turnTo(page + 1);
       }
       if (event.key === "ArrowLeft") turnTo(page - 1);
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [page, onFinish]);
+  }, [page, textRevealed, onFinish]);
 
   return (
     <main className={drumPlaying ? "story-shell drum-active" : "story-shell"}>
@@ -186,13 +193,19 @@ export default function StoryBook({ onFinish }: StoryBookProps) {
         onTouchEnd={(event) => {
           if (touchStart.current === null) return;
           const distance = (event.changedTouches[0]?.clientX ?? touchStart.current) - touchStart.current;
-          if (distance < -55) turnTo(page + 1);
-          if (distance > 55) turnTo(page - 1);
+          if (!textRevealed) setTextRevealed(true);
+          else if (distance < -55) turnTo(page + 1);
+          else if (distance > 55) turnTo(page - 1);
           touchStart.current = null;
         }}
       >
         <div className="book-shadow" aria-hidden="true" />
-        <article key={page} className={`storybook-spread ${current.cover ? "story-cover" : page % 2 === 0 ? "story-right" : "story-left"} turn-${turnDirection}`} aria-live="polite">
+        <article
+          key={page}
+          className={`storybook-spread ${current.cover ? "story-cover" : page % 2 === 0 ? "story-right" : "story-left"} ${textRevealed ? "story-text-revealed" : "story-text-hidden"} turn-${turnDirection}`}
+          aria-live="polite"
+          onClick={() => { if (!textRevealed) setTextRevealed(true); }}
+        >
           <div
             className={`story-time-scene ${current.cover ? "cover-story-time" : ""}`}
             aria-label={`${current.milestone}: ${current.moment}`}
@@ -232,7 +245,14 @@ export default function StoryBook({ onFinish }: StoryBookProps) {
           )}
         </article>
 
-        {page > 0 && (
+        {!textRevealed && (
+          <button className="story-reveal-control" onClick={() => setTextRevealed(true)}>
+            <span>TOÀN CẢNH TRƯỚC</span>
+            <b>Hiện lời kể&nbsp; →</b>
+          </button>
+        )}
+
+        {textRevealed && page > 0 && (
           <nav className="story-controls" aria-label="Điều khiển sách truyện">
             <button onClick={() => turnTo(page - 1)} aria-label="Trang trước">←</button>
             {page === storyPages.length - 1 ? (
@@ -242,7 +262,7 @@ export default function StoryBook({ onFinish }: StoryBookProps) {
             )}
           </nav>
         )}
-        <p className="story-hint">Dùng phím ← → hoặc vuốt để lật trang</p>
+        <p className="story-hint">{textRevealed ? "Bấm → lần nữa để lật trang" : "Chạm màn hình để hiện lời kể"}</p>
       </section>
     </main>
   );

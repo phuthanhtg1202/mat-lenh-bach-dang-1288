@@ -33,6 +33,8 @@ test("server-renders the Bạch Đằng story entrance", async () => {
   assert.match(html, /Chuyện Bạch Đằng/);
   assert.match(html, /Mật lệnh Bạch Đằng/);
   assert.match(html, /truyen-ke-sach-dem-trang\.png/);
+  assert.match(html, /story-text-hidden/);
+  assert.match(html, /Hiện lời kể/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/i);
 });
 
@@ -54,6 +56,9 @@ test("keeps all 13 slides and the new key-fact material", async () => {
   assert.equal(story.match(/milestone:/g)?.length, 8);
   assert.match(story, /CỘT MỐC THỜI GIAN/);
   assert.match(story, /story-time-scene/);
+  assert.match(story, /const \[textRevealed, setTextRevealed\]/);
+  assert.match(story, /story-text-hidden/);
+  assert.match(story, /TOÀN CẢNH TRƯỚC/);
   assert.match(story, /Chiều tối · 9\.4\.1288/);
 
   await access(new URL("../public/images/tran-hung-dao-hero.png", import.meta.url));

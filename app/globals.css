@@ -33,11 +33,19 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .storybook-stage { height: 100svh; min-height: 620px; position: relative; overflow: hidden; perspective: 1800px; }
 .book-shadow { display: none; }
 .storybook-spread { position: absolute; z-index: 2; inset: 0; display: block; overflow: hidden; background: #102b2d; transform-style: preserve-3d; }
-.storybook-spread::before { content: ""; position: absolute; z-index: 1; inset: 0; background: linear-gradient(90deg, rgba(2,15,18,.58), rgba(2,15,18,.18) 52%, transparent 74%); pointer-events: none; }
+.storybook-spread::before { content: ""; position: absolute; z-index: 1; inset: 0; background: linear-gradient(90deg, rgba(2,15,18,.58), rgba(2,15,18,.18) 52%, transparent 74%); pointer-events: none; transition: opacity .38s; }
 .storybook-spread.story-right::before { background: linear-gradient(270deg, rgba(2,15,18,.58), rgba(2,15,18,.18) 52%, transparent 74%); }
 .storybook-spread.turn-next { animation: pageTurnNext .54s cubic-bezier(.2,.75,.25,1); transform-origin: left center; }
 .storybook-spread.turn-back { animation: pageTurnBack .54s cubic-bezier(.2,.75,.25,1); transform-origin: right center; }
+.story-text-hidden { cursor: pointer; }
+.story-text-hidden::before { opacity: .2; }
+.story-text-hidden .storybook-paper,
+.story-text-hidden .story-cover-copy { opacity: 0; visibility: hidden; pointer-events: none; }
+.story-text-hidden .story-cover-scrim { opacity: .28; }
+.story-text-revealed .storybook-paper,
+.story-text-revealed .story-cover-copy { opacity: 1; visibility: visible; }
 .storybook-paper { width: min(560px, 42vw); position: absolute; z-index: 3; top: clamp(92px, 13vh, 126px); bottom: clamp(88px, 12vh, 118px); left: clamp(34px, 6vw, 92px); padding: clamp(28px, 4vh, 44px) clamp(28px, 3.6vw, 48px); overflow-y: auto; color: #283631; background-color: rgba(242,233,211,.96); background-image: linear-gradient(90deg, rgba(113,77,43,.045) 1px, transparent 1px), linear-gradient(rgba(113,77,43,.03) 1px, transparent 1px); background-size: 9px 9px; border: 1px solid rgba(255,248,228,.7); border-radius: 4px; box-shadow: 0 24px 80px rgba(0,0,0,.42); scrollbar-width: thin; }
+.storybook-paper, .story-cover-copy, .story-cover-scrim { transition: opacity .38s ease, visibility .38s; }
 .story-right .storybook-paper { right: clamp(34px, 6vw, 92px); left: auto; }
 .story-number { position: absolute; top: 24px; right: 26px; color: #a9553e; font: 800 .75rem "Times New Roman", serif; letter-spacing: .16em; }
 .story-kicker { margin: 0 46px 12px 0; color: #9e4938; font-size: .66rem; font-weight: 950; letter-spacing: .17em; }
@@ -55,7 +63,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .story-time-scene > span { color: #efb35f; font-size: clamp(.65rem, 1vw, .82rem); font-weight: 950; letter-spacing: .24em; }
 .story-time-scene strong { max-width: 100%; color: #fff1d4; font: 800 clamp(3.7rem, 6.3vw, 7rem)/.86 "Times New Roman", serif; letter-spacing: -.045em; text-wrap: balance; }
 .story-time-scene em { color: #d5e0d9; font-size: clamp(.9rem, 1.45vw, 1.18rem); font-style: normal; font-weight: 850; letter-spacing: .02em; }
-.storybook-art { position: absolute; z-index: 0; inset: 0; margin: 0; overflow: hidden; background: #142f31; }
+.storybook-art { position: absolute; z-index: 0; inset: 0; margin: 0; overflow: hidden; background: #142f31; transition: height .42s cubic-bezier(.18,.78,.25,1); }
 .storybook-art img { width: 100%; height: 100%; display: block; object-fit: cover; }
 .story-cover { display: block; }
 .story-cover::before { background: linear-gradient(90deg, rgba(3,18,21,.9), rgba(3,18,21,.46) 50%, rgba(3,18,21,.05) 76%); }
@@ -73,6 +81,11 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .story-controls button { min-height: 42px; padding: 0 18px; color: #f1e5cd; background: rgba(4,20,23,.92); border: 1px solid rgba(255,255,255,.18); border-radius: 999px; font-weight: 900; cursor: pointer; }
 .story-controls button:first-child { width: 42px; padding: 0; }
 .story-controls .enter-lesson { color: #172522; background: #e6b565; border-color: #e6b565; }
+.story-reveal-control { min-width: min(310px, calc(100% - 44px)); min-height: 58px; position: absolute; z-index: 15; left: 50%; bottom: 24px; display: grid; place-items: center; gap: 2px; padding: 9px 22px; color: #172522; background: rgba(232,185,107,.96); border: 1px solid #f0c77f; border-radius: 999px; box-shadow: 0 16px 50px rgba(0,0,0,.4); transform: translateX(-50%); cursor: pointer; animation: questBeacon 2.4s ease-in-out infinite; }
+.story-reveal-control span { color: #8e432f; font-size: .52rem; font-weight: 950; letter-spacing: .16em; }
+.story-reveal-control b { font-size: .9rem; }
+.story-reveal-control:hover { filter: brightness(1.08); }
+.story-reveal-control:active { transform: translateX(-50%) scale(.98); }
 .story-hint { position: absolute; z-index: 3; left: clamp(22px, 4vw, 64px); bottom: 28px; margin: 0; color: rgba(235,239,232,.7); font-size: .68rem; font-weight: 800; text-shadow: 0 2px 12px rgba(0,0,0,.7); }
 
 /* STUDENT DECK */
@@ -302,16 +315,16 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   animation: missionSweep 7s ease-in-out infinite;
 }
 .storybook-spread::after { z-index: 2; }
-.storybook-paper { animation: panelRise .52s cubic-bezier(.18,.78,.25,1) both; }
+.story-text-revealed .storybook-paper { animation: panelRise .52s cubic-bezier(.18,.78,.25,1) both; }
 .storybook-art img,
 .story-cover-image,
 .lesson-slide > .slide-image { animation: cinematicDrift 12s ease-in-out infinite alternate; will-change: transform; }
 .story-number,
 .deck-progress button.active,
 .story-progress button.active { animation: hudPulse 1.8s ease-in-out infinite; }
-.story-cover-copy > span,
+.story-text-revealed .story-cover-copy > span,
 .slide-kicker { animation: signalIn .65s ease-out both; }
-.story-cover-copy h1,
+.story-text-revealed .story-cover-copy h1,
 .lesson-slide h1 { animation: titleIn .58s cubic-bezier(.16,.8,.28,1) both; }
 .story-cover-copy button,
 .start-mission { animation: questBeacon 2.4s ease-in-out infinite; }
@@ -519,6 +532,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .storybook-stage { min-height: 560px; }
   .storybook-spread::before, .storybook-spread.story-right::before { inset: 0 0 auto; height: 46%; background: linear-gradient(180deg, rgba(2,15,18,.22), transparent 55%, rgba(2,15,18,.58)); }
   .storybook-art { inset: 0 0 auto; height: 46%; }
+  .story-text-hidden.storybook-spread::before { inset: 0; height: 100%; background: linear-gradient(180deg, rgba(2,15,18,.1), transparent 56%, rgba(2,15,18,.48)); }
+  .story-text-hidden .storybook-art { inset: 0; height: 100%; }
   .storybook-paper, .story-right .storybook-paper { width: 100%; top: 46%; right: 0; bottom: 0; left: 0; padding: 22px 22px 82px; border: 0; border-radius: 0; box-shadow: none; }
   .story-number { position: absolute; right: 18px; top: 17px; }
   .story-time-scene,
@@ -549,6 +564,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .story-controls { right: 12px; bottom: 12px; }
   .story-controls button { min-height: 40px; padding: 0 14px; font-size: .74rem; }
   .story-controls button:first-child { width: 40px; }
+  .story-reveal-control { min-width: min(280px, calc(100% - 32px)); min-height: 54px; bottom: 14px; }
   .story-hint { display: none; }
   .deck-shell { min-height: 560px; }
   .deck-brand b { display: none; }

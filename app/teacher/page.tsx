@@ -14,8 +14,8 @@ const runSheet = [
     time: "02–11′",
     slide: "Trang 1–7",
     title: "Lật sách kể chuyện",
-    teacher: "Kể mỗi trang trong 50–70 giây. Đọc như một câu chuyện, thay đổi nhịp và hướng mắt về học sinh sau mỗi đoạn. Ở trang cuối hỏi: “Chi tiết nào khiến em tò mò nhất?”",
-    student: "Nghe truyện, quan sát, dự đoán và chọn một chi tiết đáng nhớ.",
+    teacher: "Mỗi trang mở bằng toàn cảnh. Dừng 5–8 giây để học sinh nhìn tranh và đọc mốc thời gian, hỏi một câu dự đoán thật ngắn, rồi bấm Hiện lời kể. Kể trong 45–60 giây và mới bấm tiếp để lật trang.",
+    student: "Quan sát tranh trước, dự đoán diễn biến, rồi nghe lời kể để kiểm tra dự đoán.",
   },
   {
     time: "11–16′",
