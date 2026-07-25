@@ -69,9 +69,9 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .story-cover::before { background: linear-gradient(90deg, rgba(3,18,21,.9), rgba(3,18,21,.46) 50%, rgba(3,18,21,.05) 76%); }
 .story-cover-image { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center; }
 .story-cover-scrim { position: absolute; z-index: 1; inset: 0; background: linear-gradient(180deg, rgba(3,18,21,.15), transparent 56%, rgba(3,18,21,.56)); }
-.story-cover-copy { width: min(590px, 58%); position: absolute; z-index: 4; left: clamp(34px, 7vw, 104px); top: 52%; transform: translateY(-48%); }
-.cover-story-time { width: min(630px, 48vw); top: clamp(98px, 15vh, 150px); right: clamp(34px, 6vw, 92px); justify-items: end; text-align: right; transform: none; }
-.cover-story-time strong { font-size: clamp(3.4rem, 6.2vw, 6.6rem); }
+.story-cover-copy { width: min(590px, 50%); position: absolute; z-index: 4; left: clamp(34px, 7vw, 104px); top: 56%; transform: translateY(-42%); }
+.cover-story-time { width: min(590px, 44vw); top: clamp(88px, 13vh, 138px); right: clamp(34px, 6vw, 92px); justify-items: end; text-align: right; transform: none; }
+.cover-story-time strong { font-size: clamp(3rem, 5.7vw, 6rem); }
 .cover-story-time::after { background: linear-gradient(270deg, #d4894d, #f2c577 65%, transparent); }
 .story-cover-copy > span { color: #efb25f; font-size: .72rem; font-weight: 950; letter-spacing: .2em; }
 .story-cover-copy h1 { margin: 14px 0 18px; color: #fff1d7; font: 800 clamp(4rem, 7vw, 7.2rem)/.86 "Times New Roman", serif; }
@@ -87,6 +87,26 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .story-reveal-control:hover { filter: brightness(1.08); }
 .story-reveal-control:active { transform: translateX(-50%) scale(.98); }
 .story-hint { position: absolute; z-index: 3; left: clamp(22px, 4vw, 64px); bottom: 28px; margin: 0; color: rgba(235,239,232,.7); font-size: .68rem; font-weight: 800; text-shadow: 0 2px 12px rgba(0,0,0,.7); }
+
+/* CLEAR HANDOFF FROM STORY TO LESSON */
+.lesson-gateway { height: 100svh; min-height: 620px; position: relative; display: grid; align-items: center; overflow: hidden; color: #f7ead1; background: #071a1d; isolation: isolate; }
+.lesson-gateway > img { position: absolute; z-index: -3; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; animation: cinematicDrift 13s ease-in-out infinite alternate; }
+.lesson-gateway-scrim { position: absolute; z-index: -2; inset: 0; background: linear-gradient(90deg, rgba(3,18,21,.96) 0%, rgba(3,18,21,.86) 47%, rgba(3,18,21,.34) 77%, rgba(3,18,21,.18)), linear-gradient(180deg, rgba(3,18,21,.35), transparent 52%, rgba(3,18,21,.62)); }
+.lesson-gateway-card { width: min(760px, 64vw); max-height: calc(100svh - 56px); display: grid; gap: clamp(12px, 2vh, 20px); margin-left: clamp(28px, 7vw, 110px); padding: clamp(28px, 5vh, 54px) 0; overflow-y: auto; scrollbar-width: thin; }
+.lesson-gateway-kicker { color: #efb25f; font-size: clamp(.62rem, 1vw, .78rem); font-weight: 950; letter-spacing: .2em; }
+.lesson-gateway h1 { margin: 0; color: #fff1d7; font: 800 clamp(3.5rem, 7vw, 7rem)/.84 "Times New Roman", serif; text-wrap: balance; }
+.lesson-gateway-lead { max-width: 620px; margin: 0; color: #ccdad3; font-size: clamp(.9rem, 1.35vw, 1.08rem); line-height: 1.5; }
+.lesson-route { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; }
+.lesson-route article { min-height: 108px; display: grid; grid-template-columns: 34px 1fr; align-items: start; gap: 9px; padding: 14px; background: rgba(6,30,33,.78); border: 1px solid rgba(255,255,255,.15); border-top: 3px solid #b45d42; border-radius: 6px; backdrop-filter: blur(8px); }
+.lesson-route article > b { color: #e6ad60; font: 800 .76rem "Times New Roman", serif; }
+.lesson-route article > span { display: grid; gap: 6px; min-width: 0; }
+.lesson-route strong { color: #fff0d5; font: 800 1.02rem/1.12 "Times New Roman", serif; }
+.lesson-route small { color: #aebfba; font-size: .68rem; line-height: 1.35; }
+.lesson-gateway-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 9px; }
+.lesson-gateway-actions button { min-height: 48px; padding: 0 20px; border-radius: 999px; font-weight: 950; cursor: pointer; }
+.lesson-gateway-start { color: #182522; background: #e8b96b; border: 1px solid #e8b96b; animation: questBeacon 2.4s ease-in-out infinite; }
+.lesson-gateway-back { color: #eadfc8; background: rgba(5,24,27,.76); border: 1px solid rgba(255,255,255,.22); }
+.lesson-gateway-actions small { flex-basis: 100%; color: #9fb3ad; font-weight: 800; letter-spacing: .05em; }
 
 /* STUDENT DECK */
 .deck-shell { height: 100svh; min-height: 620px; overflow: hidden; color: #f5ecd8; background: #06161a; }
@@ -104,6 +124,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .sound-button.playing span { animation: soundPulse .5s infinite alternate; }
 .slide-stage { height: calc(100svh - 64px); min-height: 556px; }
 .lesson-slide { height: 100%; min-height: 556px; position: relative; display: grid; align-items: center; overflow: hidden; isolation: isolate; }
+.fact-date-layout, .forces-layout, .hero-fact-copy, .impact-layout, .video-layout, .council-layout, .keys-layout, .exit-layout, .slide-copy { max-height: 100%; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; }
 .slide-image, .tide-images img { position: absolute; z-index: -3; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .contain-image { object-fit: cover; }
 .slide-scrim { position: absolute; z-index: -2; inset: 0; pointer-events: none; }
@@ -144,6 +165,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .forces-title p { width: min(340px, 36vw); margin: 0 0 7px; color: #c4d3cd; font-size: .88rem; line-height: 1.45; }
 .forces-cards { display: grid; grid-template-columns: 1fr auto 1fr; align-items: stretch; gap: 13px; }
 .force-card { height: clamp(220px, 34vh, 300px); position: relative; display: flex; flex-direction: column; align-items: flex-start; padding: clamp(18px, 2.5vw, 28px); overflow: hidden; color: #f8ecd6; background: rgba(5,29,32,.88); border: 1px solid rgba(255,255,255,.18); border-radius: 9px; text-align: left; cursor: pointer; backdrop-filter: blur(9px); transition: transform .25s, border-color .25s, background .25s; }
+.force-card.open { overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; padding-bottom: 44px; }
 .force-card:hover { transform: translateY(-4px); border-color: #d6a25d; }
 .force-card > span { color: #e4ad62; font-size: .62rem; font-weight: 950; letter-spacing: .18em; }
 .force-card h2 { margin: 8px 0 5px; color: #fff2dc; font: 800 clamp(2rem, 3.4vw, 3.5rem)/.95 "Times New Roman", serif; }
@@ -501,7 +523,11 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 @media (max-width: 900px) {
   .story-progress { display: none; }
   .story-topbar { grid-template-columns: 1fr auto; }
-  .storybook-paper { width: min(520px, 58vw); }
+  .storybook-paper { width: min(520px, 52vw); }
+  .story-time-scene { width: min(430px, 36vw); }
+  .story-time-scene strong { font-size: clamp(3rem, 5.3vw, 4.7rem); }
+  .cover-story-time { width: min(430px, 40vw); }
+  .story-cover-copy { width: min(510px, 51vw); }
   .deck-progress { display: none; }
   .deck-topbar { grid-template-columns: 1fr auto; }
   .video-layout { grid-template-columns: 1fr; gap: 20px; align-content: center; }
@@ -534,7 +560,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .storybook-art { inset: 0 0 auto; height: 46%; }
   .story-text-hidden.storybook-spread::before { inset: 0; height: 100%; background: linear-gradient(180deg, rgba(2,15,18,.1), transparent 56%, rgba(2,15,18,.48)); }
   .story-text-hidden .storybook-art { inset: 0; height: 100%; }
-  .storybook-paper, .story-right .storybook-paper { width: 100%; top: 46%; right: 0; bottom: 0; left: 0; padding: 22px 22px 82px; border: 0; border-radius: 0; box-shadow: none; }
+  .storybook-paper, .story-right .storybook-paper { width: 100%; top: 46%; right: 0; bottom: 0; left: 0; padding: 22px 22px 98px; border: 0; border-radius: 0; box-shadow: none; }
   .story-number { position: absolute; right: 18px; top: 17px; }
   .story-time-scene,
   .story-left .story-time-scene,
@@ -566,6 +592,20 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .story-controls button:first-child { width: 40px; }
   .story-reveal-control { min-width: min(280px, calc(100% - 32px)); min-height: 54px; bottom: 14px; }
   .story-hint { display: none; }
+  .lesson-gateway { min-height: 560px; align-items: end; }
+  .lesson-gateway > img { object-position: 64% center; }
+  .lesson-gateway-scrim { background: linear-gradient(180deg, rgba(3,18,21,.12), rgba(3,18,21,.5) 38%, rgba(3,18,21,.97) 72%); }
+  .lesson-gateway-card { width: auto; max-height: calc(100svh - 28px); gap: 11px; margin: 0; padding: 30px 20px 22px; }
+  .lesson-gateway h1 { font-size: clamp(3rem, 14vw, 4.1rem); }
+  .lesson-gateway-lead { font-size: .86rem; line-height: 1.42; }
+  .lesson-route { grid-template-columns: 1fr; gap: 6px; }
+  .lesson-route article { min-height: 58px; grid-template-columns: 28px 1fr; align-items: center; padding: 9px 11px; }
+  .lesson-route article > span { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; }
+  .lesson-route strong { font-size: .92rem; }
+  .lesson-route small { font-size: .61rem; }
+  .lesson-gateway-actions { display: grid; grid-template-columns: 1fr 1fr; }
+  .lesson-gateway-actions button { min-height: 44px; padding: 0 12px; font-size: .74rem; }
+  .lesson-gateway-actions small { grid-column: 1 / -1; text-align: center; }
   .deck-shell { min-height: 560px; }
   .deck-brand b { display: none; }
   .deck-tools .sound-button { padding: 0 10px; }
@@ -669,12 +709,21 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .slide-copy, .council-layout, .video-layout { padding-top: 26px; }
   .choice-row button { min-height: 118px; }
   .map-title { top: 22px; }
+  .story-cover-copy { width: min(480px, 48vw); top: 58%; }
+  .story-cover-copy h1 { font-size: clamp(3rem, 5.2vw, 4.6rem); }
+  .story-cover-copy p { max-width: 370px; margin-bottom: 18px; font-size: .9rem; }
+  .cover-story-time { width: min(450px, 42vw); top: 82px; }
+  .cover-story-time strong { font-size: clamp(2.7rem, 5vw, 4.2rem); }
+  .lesson-gateway-card { max-height: calc(100svh - 28px); gap: 10px; padding: 24px 0; }
+  .lesson-gateway h1 { font-size: clamp(3.2rem, 6vw, 5.4rem); }
+  .lesson-route article { min-height: 88px; padding: 11px; }
+  .lesson-gateway-actions button { min-height: 42px; }
 }
 
 @media (max-width: 620px) and (max-height: 700px) {
   .storybook-spread::before, .storybook-spread.story-right::before { height: 40%; }
   .storybook-art { height: 40%; }
-  .storybook-paper, .story-right .storybook-paper { top: 40%; padding: 18px 20px 76px; }
+  .storybook-paper, .story-right .storybook-paper { top: 40%; padding: 18px 20px 94px; }
   .story-kicker { margin-bottom: 5px; }
   .story-time-scene,
   .story-left .story-time-scene,
@@ -690,6 +739,9 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .enemy-phase-copy p { font-size: .76rem; }
   .enemy-surprise span { font-size: .58rem; }
   .enemy-timeline { bottom: 7px; }
+  .lesson-gateway-card { max-height: 100svh; padding-top: 72px; }
+  .lesson-gateway h1 { font-size: 2.8rem; }
+  .lesson-gateway-lead { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

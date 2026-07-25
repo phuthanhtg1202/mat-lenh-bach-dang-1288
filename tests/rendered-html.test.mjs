@@ -46,6 +46,9 @@ test("keeps all 13 slides and the new key-fact material", async () => {
   ]);
 
   assert.match(page, /const TOTAL_SLIDES = 13/);
+  assert.match(page, /PHẦN 2 · BÀI HỌC TƯƠNG TÁC/);
+  assert.match(page, /Giải mã kế sách/);
+  assert.match(page, /Bắt đầu bài học/);
   assert.match(page, /09 · 04/);
   assert.match(page, /Ai đối đầu\?/);
   assert.match(page, /Trần Hưng Đạo/);
@@ -59,6 +62,7 @@ test("keeps all 13 slides and the new key-fact material", async () => {
   assert.match(story, /const \[textRevealed, setTextRevealed\]/);
   assert.match(story, /story-text-hidden/);
   assert.match(story, /TOÀN CẢNH TRƯỚC/);
+  assert.match(story, /Kết thúc truyện · Vào bài học/);
   assert.match(story, /Chiều tối · 9\.4\.1288/);
 
   await access(new URL("../public/images/tran-hung-dao-hero.png", import.meta.url));

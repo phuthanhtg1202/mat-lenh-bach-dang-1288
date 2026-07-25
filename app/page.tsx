@@ -53,6 +53,7 @@ const enemyMission = [
 
 export default function LessonDeck() {
   const [storyDone, setStoryDone] = useState(false);
+  const [lessonStarted, setLessonStarted] = useState(false);
   const [slide, setSlide] = useState(0);
   const [vote, setVote] = useState<"yes" | "no" | null>(null);
   const [clues, setClues] = useState<string[]>([]);
@@ -72,6 +73,7 @@ export default function LessonDeck() {
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
+      if (!storyDone || !lessonStarted) return;
       const target = event.target as HTMLElement | null;
       if (target?.matches("input, textarea, button, a")) return;
       if (event.key === "ArrowRight" || event.key === " ") goTo(slide + 1);
@@ -79,7 +81,7 @@ export default function LessonDeck() {
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [slide]);
+  }, [slide, storyDone, lessonStarted]);
 
   useEffect(() => {
     if (slide !== 5 || !enemyPlaying) return;
@@ -135,6 +137,36 @@ export default function LessonDeck() {
     return <StoryBook onFinish={() => setStoryDone(true)} />;
   }
 
+  if (!lessonStarted) {
+    return (
+      <main className="lesson-gateway">
+        <img src="/images/bach-dang-cao-trao.png" alt="Cao trào chiến thắng Bạch Đằng năm 1288" />
+        <div className="lesson-gateway-scrim" />
+        <section className="lesson-gateway-card">
+          <span className="lesson-gateway-kicker">PHẦN 2 · BÀI HỌC TƯƠNG TÁC</span>
+          <h1>Giải mã<br />chiến thắng</h1>
+          <p className="lesson-gateway-lead">Câu chuyện đã khép lại. Giờ cả lớp cùng tìm bằng chứng và thử làm người chỉ huy.</p>
+          <div className="lesson-route" aria-label="Ba chặng của bài học">
+            <article><b>01</b><span><strong>Hồ sơ trận đánh</strong><small>Ai? Khi nào? Vì sao quan trọng?</small></span></article>
+            <article><b>02</b><span><strong>Giải mã kế sách</strong><small>Con nước · bãi cọc · nghi binh</small></span></article>
+            <article><b>03</b><span><strong>Thử tài chỉ huy</strong><small>Quyết định · mô phỏng · phản tư</small></span></article>
+          </div>
+          <div className="lesson-gateway-actions">
+            <button
+              className="lesson-gateway-start"
+              onClick={() => { setSlide(1); setLessonStarted(true); }}
+            >Bắt đầu bài học&nbsp; →</button>
+            <button
+              className="lesson-gateway-back"
+              onClick={() => { setStoryDone(false); setLessonStarted(false); }}
+            >← Đọc lại truyện</button>
+            <small>12 hoạt động · khoảng 30 phút</small>
+          </div>
+        </section>
+      </main>
+    );
+  }
+
   return (
     <main className={drumPlaying ? "deck-shell drum-active" : "deck-shell"}>
       <audio
@@ -160,7 +192,7 @@ export default function LessonDeck() {
           ))}
         </div>
         <div className="deck-tools">
-          <button onClick={() => setStoryDone(false)}>Đọc truyện</button>
+          <button onClick={() => { setStoryDone(false); setLessonStarted(false); }}>Đọc truyện</button>
           <button className={drumPlaying ? "sound-button playing" : "sound-button"} onClick={playDrum}>
             <span>●</span> Trống trận
           </button>
@@ -178,7 +210,7 @@ export default function LessonDeck() {
                 <span className={drumPlaying ? "pulse-ring active" : "pulse-ring"}>●</span>
                 Nghe trống
               </button>
-              <button className="start-mission" onClick={() => goTo(1)}>Bắt đầu nhiệm vụ →</button>
+              <button className="start-mission" onClick={() => goTo(1)}>Bắt đầu bài học →</button>
             </div>
           </section>
         )}

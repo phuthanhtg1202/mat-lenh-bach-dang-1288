@@ -256,13 +256,13 @@ export default function StoryBook({ onFinish }: StoryBookProps) {
           <nav className="story-controls" aria-label="Điều khiển sách truyện">
             <button onClick={() => turnTo(page - 1)} aria-label="Trang trước">←</button>
             {page === storyPages.length - 1 ? (
-              <button className="enter-lesson" onClick={onFinish}>Bước vào thử thách&nbsp; →</button>
+              <button className="enter-lesson" onClick={onFinish}>Kết thúc truyện · Vào bài học&nbsp; →</button>
             ) : (
               <button onClick={() => turnTo(page + 1)} aria-label="Trang tiếp">Lật trang&nbsp; →</button>
             )}
           </nav>
         )}
-        <p className="story-hint">{textRevealed ? "Bấm → lần nữa để lật trang" : "Chạm màn hình để hiện lời kể"}</p>
+        {!textRevealed && <p className="story-hint">Chạm màn hình để hiện lời kể</p>}
       </section>
     </main>
   );
