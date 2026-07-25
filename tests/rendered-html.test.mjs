@@ -37,9 +37,10 @@ test("server-renders the Bạch Đằng story entrance", async () => {
 });
 
 test("keeps all 13 slides and the new key-fact material", async () => {
-  const [page, teacher] = await Promise.all([
+  const [page, teacher, story] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/teacher/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/StoryBook.tsx", import.meta.url), "utf8"),
   ]);
 
   assert.match(page, /const TOTAL_SLIDES = 13/);
@@ -50,6 +51,9 @@ test("keeps all 13 slides and the new key-fact material", async () => {
   assert.match(page, /\/images\/tran-hung-dao-hero\.png/);
   assert.match(teacher, /7 trang truyện \+ 13 slide/);
   assert.match(teacher, /9-4-1288/);
+  assert.equal(story.match(/milestone:/g)?.length, 8);
+  assert.match(story, /CỘT MỐC THỜI GIAN/);
+  assert.match(story, /Chiều tối · 9\.4\.1288/);
 
   await access(new URL("../public/images/tran-hung-dao-hero.png", import.meta.url));
 });

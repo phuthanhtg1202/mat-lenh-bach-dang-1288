@@ -5,6 +5,8 @@ import { useEffect, useRef, useState } from "react";
 const storyPages = [
   {
     kicker: "TRUYỆN MỞ ĐẦU",
+    milestone: "30.3 → 9.4.1288",
+    moment: "Mười ngày quyết định",
     title: "Mật lệnh Bạch Đằng",
     text: ["Một dòng sông. Một kế sách. Một buổi sáng làm nên lịch sử."],
     image: "/images/truyen-ke-sach-dem-trang.png",
@@ -13,6 +15,8 @@ const storyPages = [
   },
   {
     kicker: "MÙA XUÂN · 1288",
+    milestone: "30.3.1288",
+    moment: "Địch bắt đầu rút quân",
     title: "Đường về bị chặn",
     text: [
       "Mùa xuân năm 1288, đoàn quân Nguyên–Mông buộc phải rút khỏi Đại Việt. Con đường bộ đầy hiểm nguy, còn đường biển tưởng như rộng mở hơn. Vì thế, một đoàn chiến thuyền lớn do Ô Mã Nhi chỉ huy xuôi về phía cửa biển.",
@@ -24,6 +28,8 @@ const storyPages = [
   },
   {
     kicker: "KẾ SÁCH TRONG ĐÊM",
+    milestone: "Cuối tháng 3 → đầu tháng 4",
+    moment: "Bày thế trận Bạch Đằng",
     title: "Chọn dòng sông",
     text: [
       "Trong một đêm yên gió, Trần Hưng Đạo cùng các tướng nhìn thật lâu vào bản đồ cửa sông. Ông hiểu rằng nếu đối đầu trực diện giữa dòng nước rộng, những chiến thuyền lớn của đối phương vẫn rất nguy hiểm.",
@@ -35,6 +41,8 @@ const storyPages = [
   },
   {
     kicker: "CẢ DÂN TỘC VÀO TRẬN",
+    milestone: "Đầu tháng 4.1288",
+    moment: "Bí mật dựng bãi cọc",
     title: "Không ai đứng ngoài",
     text: [
       "Khi mệnh lệnh truyền xuống, cả vùng ven sông cùng chuyển động. Người vào rừng chọn gỗ chắc. Người vót nhọn đầu cọc. Người chèo thuyền, kéo dây và dò từng luồng nước giữa đêm tối.",
@@ -46,6 +54,8 @@ const storyPages = [
   },
   {
     kicker: "RẠNG SÁNG · 9.4.1288",
+    milestone: "Rạng sáng · 9.4.1288",
+    moment: "Nước cao che kín bãi cọc",
     title: "Dòng sông im lặng",
     text: [
       "Rạng sáng ngày 9 tháng 4 năm 1288, nước triều dâng cao. Bãi cọc biến mất hoàn toàn dưới mặt sông. Nhìn từ xa, Bạch Đằng vẫn rộng và yên như chưa từng có một chiếc bẫy nào.",
@@ -57,6 +67,8 @@ const storyPages = [
   },
   {
     kicker: "CON NƯỚC ĐỔI CHIỀU",
+    milestone: "Gần trưa · 9.4.1288",
+    moment: "Nước rút, cọc bắt đầu lộ",
     title: "Chiếc bẫy thức giấc",
     text: [
       "Đoàn thuyền lớn đã vào đúng vị trí. Sau lưng họ, các lối rút dần bị những lực lượng mai phục kiểm soát. Phía trước, thuyền nhẹ Đại Việt vẫn vừa đánh vừa lùi, giữ cho đối phương tiếp tục đuổi theo.",
@@ -68,6 +80,8 @@ const storyPages = [
   },
   {
     kicker: "BẠCH ĐẰNG DẬY SÓNG",
+    milestone: "Trưa → chiều · 9.4.1288",
+    moment: "Tổng công kích",
     title: "Vòng vây khép lại",
     text: [
       "Tiếng trống trận vang lên. Từ các nhánh sông, sau những bãi cây và dọc hai bên bờ, thuyền chiến Đại Việt đồng loạt xuất hiện. Những mũi tiến công khép lại quanh đội hình đang mắc kẹt.",
@@ -79,9 +93,11 @@ const storyPages = [
   },
   {
     kicker: "BÌNH MINH ĐẠI VIỆT",
+    milestone: "Chiều tối · 9.4.1288",
+    moment: "Trận đánh kết thúc",
     title: "Dòng sông yên trở lại",
     text: [
-      "Khi mặt trời lên cao, Bạch Đằng dần yên trở lại. Đoàn thủy quân xâm lược bị đánh tan, Ô Mã Nhi bị bắt. Cuộc kháng chiến chống Nguyên–Mông lần thứ ba đi đến thắng lợi.",
+      "Khi chiều buông, Bạch Đằng dần yên trở lại. Đoàn thủy quân xâm lược bị đánh tan, Ô Mã Nhi bị bắt. Cuộc kháng chiến chống Nguyên–Mông lần thứ ba đi đến thắng lợi.",
       "Trên bờ sông, những người đã chặt gỗ, chèo thuyền, canh nước và chiến đấu lại gặp nhau. Không có bàn tay nào là quá nhỏ trong chiến thắng ấy.",
       "Hơn bảy thế kỷ đã qua, câu chuyện Bạch Đằng vẫn nhắc chúng ta rằng lòng yêu nước không chỉ là lòng dũng cảm. Đó còn là trí tuệ, sự đoàn kết và khả năng chờ đúng thời cơ để bảo vệ quê hương.",
     ],
@@ -182,6 +198,11 @@ export default function StoryBook({ onFinish }: StoryBookProps) {
               <img className="story-cover-image" src={current.image} alt={current.alt} />
               <div className="story-cover-scrim" />
               <div className="story-cover-copy">
+                <div className="story-time-marker cover-time-marker">
+                  <small>CỘT MỐC THỜI GIAN</small>
+                  <b>{current.milestone}</b>
+                  <em>{current.moment}</em>
+                </div>
                 <span>{current.kicker}</span>
                 <h1>{current.title}</h1>
                 <p>{current.text[0]}</p>
@@ -193,6 +214,11 @@ export default function StoryBook({ onFinish }: StoryBookProps) {
               <div className="storybook-paper">
                 <span className="story-number">{String(page).padStart(2, "0")}</span>
                 <div className="story-copy-inner">
+                  <div className="story-time-marker">
+                    <small>CỘT MỐC THỜI GIAN</small>
+                    <b>{current.milestone}</b>
+                    <em>{current.moment}</em>
+                  </div>
                   <p className="story-kicker">{current.kicker}</p>
                   <h1>{current.title}</h1>
                   <div className="story-body">
