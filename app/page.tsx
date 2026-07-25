@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import StoryBook from "./StoryBook";
 
-const TOTAL_SLIDES = 9;
+const TOTAL_SLIDES = 13;
 
 const battleBeats = [
   ["Mất lương", "Buộc phải rút"],
@@ -63,6 +63,9 @@ export default function LessonDeck() {
   const [drumPlaying, setDrumPlaying] = useState(false);
   const [enemyPhase, setEnemyPhase] = useState(0);
   const [enemyPlaying, setEnemyPlaying] = useState(false);
+  const [armyFocus, setArmyFocus] = useState<"dai-viet" | "nguyen" | null>(null);
+  const [heroReveal, setHeroReveal] = useState(false);
+  const [impactFocus, setImpactFocus] = useState<"ket-thuc" | "bao-ve" | "di-san" | null>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
 
   const goTo = (next: number) => setSlide(Math.max(0, Math.min(TOTAL_SLIDES - 1, next)));
@@ -79,7 +82,7 @@ export default function LessonDeck() {
   }, [slide]);
 
   useEffect(() => {
-    if (slide !== 1 || !enemyPlaying) return;
+    if (slide !== 5 || !enemyPlaying) return;
     if (enemyPhase === 1 || enemyPhase >= enemyMission.length - 1) {
       setEnemyPlaying(false);
       return;
@@ -181,6 +184,125 @@ export default function LessonDeck() {
         )}
 
         {slide === 1 && (
+          <section className="lesson-slide fact-slide fact-date-slide">
+            <img className="slide-image" src="/images/song-bach-dang-trieu-cao.png" alt="Sông Bạch Đằng lúc thủy triều lên" />
+            <div className="slide-scrim fact-date-scrim" />
+            <div className="fact-date-layout">
+              <div className="fact-heading">
+                <span className="fact-number">01</span>
+                <span className="slide-kicker">HỒ SƠ TRẬN ĐÁNH</span>
+              </div>
+              <h1 className="giant-date"><span>09 · 04</span><strong>1288</strong></h1>
+              <div className="fact-date-rail">
+                <article><small>Ở đâu?</small><b>Sông Bạch Đằng</b></article>
+                <article><small>Khi nào?</small><b>Sáng sớm → chiều tối</b></article>
+                <article><small>Toàn chiến dịch</small><b>30/3 → 9/4/1288</b></article>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {slide === 2 && (
+          <section className="lesson-slide fact-slide forces-slide">
+            <img className="slide-image" src="/images/ban-do-chien-thuat.png" alt="Bản đồ minh họa chiến trường Bạch Đằng" />
+            <div className="slide-scrim full-scrim strong" />
+            <div className="forces-layout">
+              <div className="forces-title">
+                <span className="slide-kicker">HỒ SƠ TRẬN ĐÁNH · 02</span>
+                <h1>Ai đối đầu?</h1>
+                <p>Chạm vào từng phía để gặp những người chủ chốt.</p>
+              </div>
+              <div className="forces-cards">
+                <button
+                  className={`force-card dai-viet ${armyFocus === "dai-viet" ? "open" : ""}`}
+                  onClick={() => setArmyFocus(armyFocus === "dai-viet" ? null : "dai-viet")}
+                  aria-expanded={armyFocus === "dai-viet"}
+                >
+                  <span>NHÀ TRẦN</span>
+                  <h2>Đại Việt</h2>
+                  <small>Bảo vệ đất nước</small>
+                  <div className="force-people">
+                    <b>Trần Nhân Tông <em>Nhà vua</em></b>
+                    <b>Trần Quốc Tuấn <em>Tổng chỉ huy</em></b>
+                    <b>Nguyễn Khoái <em>Đánh nhử ở Bạch Đằng</em></b>
+                    <b>Trần Khánh Dư <em>Đánh thuyền lương</em></b>
+                  </div>
+                </button>
+                <div className="versus-mark">ĐỐI ĐẦU</div>
+                <button
+                  className={`force-card nguyen ${armyFocus === "nguyen" ? "open" : ""}`}
+                  onClick={() => setArmyFocus(armyFocus === "nguyen" ? null : "nguyen")}
+                  aria-expanded={armyFocus === "nguyen"}
+                >
+                  <span>ĐẾ QUỐC NGUYÊN</span>
+                  <h2>Nguyên–Mông</h2>
+                  <small>Rút quân theo đường thủy</small>
+                  <div className="force-people">
+                    <b>Thoát Hoan <em>Tổng chỉ huy xâm lược</em></b>
+                    <b>Ô Mã Nhi <em>Chỉ huy thủy quân</em></b>
+                    <b>Phàn Tiếp <em>Tướng thủy quân</em></b>
+                  </div>
+                </button>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {slide === 3 && (
+          <section className="lesson-slide fact-slide hero-fact-slide">
+            <img className="slide-image hero-fact-image" src="/images/tran-hung-dao-hero.png" alt="Minh họa Trần Hưng Đạo chỉ huy trên sông Bạch Đằng" />
+            <div className="slide-scrim hero-fact-scrim" />
+            <div className="hero-fact-copy">
+              <span className="slide-kicker">NGƯỜI HÙNG TRUNG TÂM · 03</span>
+              <h1>Trần<br />Hưng Đạo</h1>
+              <p className="hero-real-name">Trần Quốc Tuấn · Tổng chỉ huy</p>
+              <div className="hero-deeds">
+                <span>Đoán đúng đường rút</span>
+                <span>Chọn đúng chiến trường</span>
+                <span>Chờ đúng con nước</span>
+              </div>
+              <button className="hero-reveal-button" onClick={() => setHeroReveal((value) => !value)}>
+                {heroReveal ? "Thu gọn" : "Ai cùng ông làm nên chiến thắng?"}
+              </button>
+              {heroReveal && (
+                <div className="collective-hero">
+                  <b>Quân dân Đại Việt</b>
+                  <span>Đóng cọc · chèo thuyền · mai phục · hiệp đồng</span>
+                </div>
+              )}
+            </div>
+          </section>
+        )}
+
+        {slide === 4 && (
+          <section className="lesson-slide fact-slide impact-slide">
+            <img className="slide-image" src="/images/bach-dang-cao-trao.png" alt="Cao trào chiến thắng Bạch Đằng năm 1288" />
+            <div className="slide-scrim full-scrim strong" />
+            <div className="impact-layout">
+              <span className="slide-kicker">VÌ SAO QUAN TRỌNG? · 04</span>
+              <h1>Một trận đánh.<br />Định đoạt cuộc chiến.</h1>
+              <div className="impact-cards">
+                <button className={impactFocus === "ket-thuc" ? "active" : ""} onClick={() => setImpactFocus("ket-thuc")}>
+                  <span>01</span><b>Kết thúc</b><small>Cuộc xâm lược lần thứ ba</small>
+                </button>
+                <button className={impactFocus === "bao-ve" ? "active" : ""} onClick={() => setImpactFocus("bao-ve")}>
+                  <span>02</span><b>Bảo vệ</b><small>Nền độc lập Đại Việt</small>
+                </button>
+                <button className={impactFocus === "di-san" ? "active" : ""} onClick={() => setImpactFocus("di-san")}>
+                  <span>03</span><b>Để lại</b><small>Đỉnh cao nghệ thuật thủy chiến</small>
+                </button>
+              </div>
+              <p className="impact-line">
+                {impactFocus === "ket-thuc" && "Đòn quyết chiến góp phần kết thúc thắng lợi cuộc kháng chiến năm 1287–1288."}
+                {impactFocus === "bao-ve" && "Đại Việt giữ vững chủ quyền trước một đế quốc hùng mạnh bậc nhất thời đó."}
+                {impactFocus === "di-san" && "Trí tuệ, địa hình, thời cơ và sức dân được kết hợp trong một kế hoạch thống nhất."}
+                {!impactFocus && "Chạm vào 3 dấu mốc để giải mã ý nghĩa chiến thắng."}
+              </p>
+            </div>
+          </section>
+        )}
+
+        {slide === 5 && (
           <section className={`lesson-slide enemy-pov-slide enemy-phase-${enemyPhase} ${enemyPlaying ? "is-playing" : ""}`}>
             <div className="enemy-world" aria-label="Góc nhìn từ boong chiến thuyền địch trên sông Bạch Đằng">
               <img className="enemy-pov-frame enemy-high-frame" src="/images/enemy-pov-high-tide.png" alt="Góc nhìn quân địch khi nước triều còn cao và bãi cọc bị che kín" />
@@ -251,7 +373,7 @@ export default function LessonDeck() {
           </section>
         )}
 
-        {slide === 2 && (
+        {slide === 6 && (
           <section className="lesson-slide video-slide">
             <img className="slide-image" src="/images/song-bach-dang-trieu-cao.png" alt="Sông Bạch Đằng trong màn sương" />
             <div className="slide-scrim full-scrim" />
@@ -276,7 +398,7 @@ export default function LessonDeck() {
           </section>
         )}
 
-        {slide === 3 && (
+        {slide === 7 && (
           <section className="lesson-slide map-slide">
             <img className="slide-image contain-image" src="/images/ban-do-chien-thuat.png" alt="Bản đồ minh họa chiến thuật Bạch Đằng" />
             <div className="map-title">
@@ -299,7 +421,7 @@ export default function LessonDeck() {
           </section>
         )}
 
-        {slide === 4 && (
+        {slide === 8 && (
           <section className="lesson-slide tide-slide">
             <div className="tide-images" aria-label="Mô phỏng triều cao và triều rút">
               <img src="/images/song-bach-dang-trieu-rut.png" alt="Bãi cọc xuất hiện khi triều rút" />
@@ -330,7 +452,7 @@ export default function LessonDeck() {
           </section>
         )}
 
-        {slide === 5 && (
+        {slide === 9 && (
           <section className="lesson-slide council-slide">
             <img className="slide-image" src="/images/song-bach-dang-trieu-cao.png" alt="Đoàn thuyền trên sông lúc triều cao" />
             <div className="slide-scrim full-scrim" />
@@ -363,7 +485,7 @@ export default function LessonDeck() {
           </section>
         )}
 
-        {slide === 6 && (
+        {slide === 10 && (
           <section className="lesson-slide battle-slide">
             <img className="slide-image" src="/images/bach-dang-cao-trao.png" alt="Cao trào trận Bạch Đằng khi cọc xuất hiện" />
             <div className="slide-scrim battle-scrim" />
@@ -381,7 +503,7 @@ export default function LessonDeck() {
           </section>
         )}
 
-        {slide === 7 && (
+        {slide === 11 && (
           <section className="lesson-slide keys-slide">
             <img className="slide-image" src="/images/ban-do-chien-thuat.png" alt="Bản đồ chiến trường Bạch Đằng" />
             <div className="slide-scrim full-scrim strong" />
@@ -400,7 +522,7 @@ export default function LessonDeck() {
           </section>
         )}
 
-        {slide === 8 && (
+        {slide === 12 && (
           <section className="lesson-slide exit-slide">
             <img className="slide-image" src="/images/bach-dang-cao-trao.png" alt="Quân dân Đại Việt phối hợp trong trận Bạch Đằng" />
             <div className="slide-scrim full-scrim strong" />
@@ -416,7 +538,7 @@ export default function LessonDeck() {
       {slide > 0 && (
         <nav className="slide-controls" aria-label="Điều khiển slide">
           <button onClick={() => goTo(slide - 1)} disabled={slide === 0} aria-label="Slide trước">←</button>
-          <span><b>{String(slide + 1).padStart(2, "0")}</b> / 09</span>
+          <span><b>{String(slide + 1).padStart(2, "0")}</b> / 13</span>
           <button onClick={() => goTo(slide + 1)} disabled={slide === TOTAL_SLIDES - 1} aria-label="Slide tiếp">→</button>
         </nav>
       )}

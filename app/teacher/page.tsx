@@ -11,64 +11,71 @@ const runSheet = [
     student: "Lắng nghe, quan sát, chưa ghi chép.",
   },
   {
-    time: "02–12′",
+    time: "02–11′",
     slide: "Trang 1–7",
     title: "Lật sách kể chuyện",
     teacher: "Kể mỗi trang trong 50–70 giây. Đọc như một câu chuyện, thay đổi nhịp và hướng mắt về học sinh sau mỗi đoạn. Ở trang cuối hỏi: “Chi tiết nào khiến em tò mò nhất?”",
     student: "Nghe truyện, quan sát, dự đoán và chọn một chi tiết đáng nhớ.",
   },
   {
-    time: "12–16′",
-    slide: "02",
+    time: "11–16′",
+    slide: "Slide 02–05",
+    title: "Hồ sơ lịch sử trong 5 phút",
+    teacher: "Cho lớp đọc to ngày 9-4-1288. Bấm lần lượt hai đạo quân, gọi tên Trần Quốc Tuấn và Ô Mã Nhi. Ở slide người hùng, hỏi: “Một vị tướng có thể tự mình thắng trận không?” rồi mở đáp án Quân dân Đại Việt.",
+    student: "Ghi nhớ ngày – hai phía – người chỉ huy – ý nghĩa bằng bốn câu thật ngắn.",
+  },
+  {
+    time: "16–21′",
+    slide: "06",
     title: "Nhập vai hạm đội địch",
     teacher: "Bấm Bắt đầu hành trình và để cảnh dừng ở Mồi nhử. Cho lớp ra lệnh Đuổi theo/Dừng quan sát, rồi chạy tiếp đến khi bãi cọc lộ ra. Chốt bằng câu hỏi: “Ta đã nhìn thấy gì, và điều gì đã bị che giấu?”",
     student: "Quan sát từ boong tàu địch, ra quyết định và giải thích vì sao mình bị bất ngờ.",
   },
   {
-    time: "16–20′",
-    slide: "03",
+    time: "21–24′",
+    slide: "07",
     title: "Xem đúng một đoạn phim",
     teacher: "Mở phim VTV từ 00:40 đến 03:10. Dừng lại và hỏi: “Dòng sông trở thành vũ khí bằng cách nào?”",
     student: "Ghi đúng ba từ khóa nghe được.",
   },
   {
-    time: "20–28′",
-    slide: "04",
+    time: "24–31′",
+    slide: "08",
     title: "Mở ba manh mối",
     teacher: "Chia lớp thành ba đội: Cắt lương – Giấu cọc – Phục binh. Mỗi đội giải thích vai trò của manh mối trong 30 giây.",
     student: "Thảo luận nhóm và nối ba mắt xích.",
   },
   {
-    time: "28–37′",
-    slide: "05",
+    time: "31–39′",
+    slide: "09",
     title: "Điều khiển con nước",
     teacher: "Kéo thanh thủy triều thật chậm. Khi học sinh thấy đúng thời cơ, cả lớp đứng dậy. Chốt: cọc chỉ hiệu quả khi kết hợp với thủy triều và nghi binh.",
     student: "Quan sát, dự đoán, hô “Thời cơ!”",
   },
   {
-    time: "37–45′",
-    slide: "06",
+    time: "39–46′",
+    slide: "10",
     title: "Hội đồng tác chiến",
     teacher: "Mỗi đội chọn A/B/C và đưa ra hai bằng chứng. Sau khi chọn, yêu cầu đội khác tìm một lỗ hổng trong phương án.",
     student: "Ra quyết định và phản biện.",
   },
   {
-    time: "45–52′",
-    slide: "07",
+    time: "46–52′",
+    slide: "11",
     title: "Kể trận đánh bằng năm nhịp",
     teacher: "Bấm từng nhịp. Cả lớp tạo âm thanh: xoa tay = nước; vỗ đùi = mái chèo; vỗ tay = tổng công kích.",
     student: "Kể lại năm bước bằng lời của mình.",
   },
   {
     time: "52–57′",
-    slide: "08",
+    slide: "12",
     title: "Mở ba chìa khóa",
     teacher: "Mời ba học sinh giải thích: Con người – Địa hình – Thời cơ. Nhấn mạnh đây là chiến thắng của sự phối hợp và sức dân.",
     student: "Mỗi em giải thích một chìa khóa.",
   },
   {
     time: "57–60′",
-    slide: "09",
+    slide: "13",
     title: "Tự hào có lý do",
     teacher: "Cho 60 giây viết. Mời hai em đọc. Kết: “Ta tự hào vì cha ông biết quan sát, đoàn kết và bảo vệ quê hương bằng trí tuệ.”",
     student: "Hoàn thành vé rời lớp.",
@@ -106,7 +113,7 @@ export default function TeacherPlan() {
       <header className="teacher-hero">
         <p>KẾ HOẠCH DẠY HỌC</p>
         <h1>Mật lệnh<br />Bạch Đằng 1288</h1>
-        <div className="teacher-meta"><span>60 phút</span><span>7 trang truyện + 9 slide</span><span>9–15 tuổi</span></div>
+        <div className="teacher-meta"><span>60 phút</span><span>7 trang truyện + 13 slide</span><span>9–15 tuổi</span></div>
       </header>
 
       <section className="teacher-grid two-columns">
@@ -171,6 +178,8 @@ export default function TeacherPlan() {
           <p className="teacher-eyebrow">NÓI CHO CHÍNH XÁC</p>
           <h2>Ba lưu ý lịch sử</h2>
           <ul>
+            <li>Trận quyết chiến diễn ra từ sáng đến chiều <b>9-4-1288</b>; toàn chiến dịch kéo dài từ 30-3 đến 9-4-1288.</li>
+            <li>Trần Hưng Đạo là người chỉ huy trung tâm, nhưng chiến thắng thuộc về sự phối hợp của vua, tướng sĩ và nhân dân Đại Việt.</li>
             <li>Không dạy rằng chiến thắng “chỉ nhờ cọc”.</li>
             <li>Câu chuyện Vua Bà là <b>truyền thuyết địa phương</b>.</li>
             <li>Tập trung vào bảo vệ độc lập; không nuôi dưỡng thù ghét dân tộc.</li>
@@ -184,6 +193,8 @@ export default function TeacherPlan() {
         <div>
           <a href="https://baotanglichsu.vn/vi/Articles/3096/18594/tim-hieu-ve-nhung-chiec-coc-bach-djang-nam-1288-hien-djang-trung-bay-o-bao-tang-lich-su-quoc-gia.html" target="_blank" rel="noreferrer">Cọc Bạch Đằng ↗</a>
           <a href="https://baotanglichsu.vn/VI/Articles/3096/71341/tran-thuy-chien-bach-djang-nhung-manh-ghep.html" target="_blank" rel="noreferrer">Những mảnh ghép trận đánh ↗</a>
+          <a href="https://www.qdnd.vn/quoc-phong-an-ninh/xay-dung-quan-doi/tran-quyet-chien-chien-luoc-mau-muc-tren-song-bach-dang-439022" target="_blank" rel="noreferrer">Mốc 9-4-1288 ↗</a>
+          <a href="https://www.qdnd.vn/quoc-phong-an-ninh/xay-dung-quan-doi/danh-vao-cho-yeu-cua-giac-trong-tran-bach-dang-4-1288-438616" target="_blank" rel="noreferrer">Nhân vật và diễn biến ↗</a>
           <a href="https://mixkit.co/free-sound-effects/war/" target="_blank" rel="noreferrer">Nguồn tiếng trống ↗</a>
         </div>
       </section>
